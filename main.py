@@ -57,9 +57,9 @@ if login_tab.get(login_name) == login_password:
         print(LINE_SEPARATOR)
 
         #vykreslení grafu
-        COLUMN_WIDTH = 20
+        OCCURENCES_COLUMN_WIDTH = 14
 
-        print("DÉLKA | VÝSKYT" + " " * (COLUMN_WIDTH - 7) + " | POČET")
+        print("DÉLKA | VÝSKYT" + " " * (OCCURENCES_COLUMN_WIDTH - 7) + " | POČET")
         print(LINE_SEPARATOR)
 
         # tady by se mi líbil víc cyklus "while", ale zatím neumíme ;)
@@ -67,7 +67,8 @@ if login_tab.get(login_name) == login_password:
         for key in range(1, MAX_WORD_LENGHT):
             if len_occurences.get(str(key)) != None:
                 len_string = " " * (5 - len(str(key))) + str(key)
-                print(len_string + " |" + " " * COLUMN_WIDTH + " | " + str(len_occurences.get(str(key))))
+                graph_gauge = "*" * (len_occurences.get(str(key)) % OCCURENCES_COLUMN_WIDTH)
+                print(len_string + " |" + graph_gauge + " " * (OCCURENCES_COLUMN_WIDTH - len(graph_gauge)) + " | " + str(len_occurences.get(str(key))))
 
     else:
         print("Špatně zvolené id číslo textu.")
