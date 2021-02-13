@@ -23,6 +23,7 @@ if login_tab.get(login_name) == login_password:
         numbers = 0
         numbers_sum = 0
         actual_word = ""
+        len_occurences = dict()
 
         for char in TEXTS[int(text_id) - 1]:
             if char.isalnum():
@@ -40,6 +41,11 @@ if login_tab.get(login_name) == login_password:
                     if actual_word.isnumeric():
                         numbers += 1
                         numbers_sum += int(actual_word)
+
+                    if len_occurences.get(str(len(actual_word))) != None:
+                        len_occurences[str(len(actual_word))] += 1
+                    else:
+                        len_occurences[str(len(actual_word))] = 1
                     actual_word = ""
 
         print("Ve vybraném textu je celkem {0} slov.".format(total_words))
@@ -51,17 +57,20 @@ if login_tab.get(login_name) == login_password:
         print(LINE_SEPARATOR)
 
         #vykreslení grafu
-        print("DÉLKA | VÝSKYT        | POČET")
+        COLUMN_WIDTH = 20
+
+        print("DÉLKA | VÝSKYT" + " " * (COLUMN_WIDTH - 7) + " | POČET")
         print(LINE_SEPARATOR)
-        for i in range(6,15):
-            len_string = " " * (5 - len(str(i))) + str(i)
-            print(len_string + " |" + " " * 14 + " |")
+
+        # tady by se mi líbil víc cyklus "while", ale zatím neumíme ;)
+        MAX_WORD_LENGHT = 50
+        for key in range(1, MAX_WORD_LENGHT):
+            if len_occurences.get(str(key)) != None:
+                len_string = " " * (5 - len(str(key))) + str(key)
+                print(len_string + " |" + " " * COLUMN_WIDTH + " | " + str(len_occurences.get(str(key))))
 
     else:
         print("Špatně zvolené id číslo textu.")
 
 else:
     print("Nesprávné jméno nebo heslo. Přístup zamítnut!")
-
-
-print("konec")
