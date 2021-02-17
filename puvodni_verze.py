@@ -20,15 +20,14 @@ if login_tab.get(login_name) == login_password:
     if text_id.strip() in ("1", "2", "3"):
 
         #hlavní analýza
-        analyzed_words = dict()
-        len_occurences = dict()
-        # analyzed_words = dict(total_words=0,
-        #                       titlecase_words=0,
-        #                       uppercase_words=0,
-        #                       lowercase_words=0,
-        #                       numbers=0,
-        #                       numbers_sum=0)
+        analyzed_words = dict(total_words=0,
+                              titlecase_words=0,
+                              uppercase_words=0,
+                              lowercase_words=0,
+                              numbers=0,
+                              numbers_sum=0)
         actual_word = ""
+        len_occurences = dict()
 
         for char in TEXTS[int(text_id) - 1]:
             if char.isalnum():
@@ -67,15 +66,13 @@ if login_tab.get(login_name) == login_password:
         print("DÉLKA | VÝSKYT" + " " * (OCCURENCES_COLUMN_WIDTH - 7) + " | POČET")
         print(LINE_SEPARATOR)
 
-        key = 1
-        while len_occurences:
-            if len_occurences.get(f"{key}") is not None:
+        # tady by se mi líbil víc cyklus "while", ale zatím neumím ;)
+        MAX_WORD_LENGHT = 50
+        for key in range(1, MAX_WORD_LENGHT):
+            if len_occurences.get(str(key)) is not None:
                 len_string = " " * (5 - len(str(key))) + str(key)
-                graph_gauge = "*" * (len_occurences.get(f"{key}") % OCCURENCES_COLUMN_WIDTH)
-                print(len_string + " |" + graph_gauge + " " * (OCCURENCES_COLUMN_WIDTH - len(graph_gauge)) +
-                      " | " + str(len_occurences.get(f"{key}")))
-                len_occurences.pop(f"{key}")
-                key += 1
+                graph_gauge = "*" * (len_occurences.get(str(key)) % OCCURENCES_COLUMN_WIDTH)
+                print(len_string + " |" + graph_gauge + " " * (OCCURENCES_COLUMN_WIDTH - len(graph_gauge)) + " | " + str(len_occurences.get(str(key))))
 
     else:
         print("Špatně zvolené číslo textu.")
