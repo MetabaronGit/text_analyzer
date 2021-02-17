@@ -1,6 +1,6 @@
 from task_template import TEXTS
-LINE_SEPARATOR = "-" * 50
 
+LINE_SEPARATOR = "-" * 50
 login_tab = dict(bob="123",
                  ann="pass123",
                  mike="password123",
@@ -18,7 +18,6 @@ if login_tab.get(login_name) == login_password:
     print(LINE_SEPARATOR)
 
     if text_id.strip() in ("1", "2", "3"):
-
         #hlavní analýza
         len_occurences = dict()
         analyzed_words = dict(total_words=0,
