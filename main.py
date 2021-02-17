@@ -20,14 +20,13 @@ if login_tab.get(login_name) == login_password:
     if text_id.strip() in ("1", "2", "3"):
 
         #hlavní analýza
-        analyzed_words = dict()
         len_occurences = dict()
-        # analyzed_words = dict(total_words=0,
-        #                       titlecase_words=0,
-        #                       uppercase_words=0,
-        #                       lowercase_words=0,
-        #                       numbers=0,
-        #                       numbers_sum=0)
+        analyzed_words = dict(total_words=0,
+                              titlecase_words=0,
+                              uppercase_words=0,
+                              lowercase_words=0,
+                              numbers=0,
+                              numbers_sum=0)
         actual_word = ""
 
         for char in TEXTS[int(text_id) - 1]:
